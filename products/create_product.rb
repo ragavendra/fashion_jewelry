@@ -23,15 +23,6 @@ describe "CreateProduct" do
 		#@verification_errors.should == []
 		expect @verification_errors == []
 	end
-=begin
-	it "login" do
-		@driver.get(@base_url)
-		#@driver.find_element(:id, "edit-name").clear
-		@driver.find_element(:id, "edit-name").send_keys ENV['USER']
-		@driver.find_element(:id, "edit-pass").send_keys ENV['PASSWD']
-		@driver.find_element(:id, "edit-submit").click
-	end
-=end
 
 	it "test_create_product" do
 		@driver.get(@base_url)
@@ -40,7 +31,7 @@ describe "CreateProduct" do
 		@driver.find_element(:id, "edit-pass").send_keys ENV['PASSWD']
 		@driver.find_element(:id, "edit-submit").click
 		
-	CSV.foreach("./products.csv") do |row|
+		CSV.foreach(File.join(File.dirname(__FILE__), 'products.csv')) do |row|
 		@driver.get(@base_url + "/node/add/product")
 		@driver.find_element(:id, "edit-title").clear
 		@driver.find_element(:id, "edit-title").send_keys row[0]
@@ -54,11 +45,8 @@ describe "CreateProduct" do
 		my_select.find_elements( :tag_name => "option" ).find do |option|
 			  option.text == row[2]
 		end.click
-=begin
-		@driver.find_element(:id, "edit-field-image-cache-und-0-upload").location_once_scrolled_into_view
-		@driver.find_element(:id, "edit-field-image-cache-und-0-upload").click
-		@driver.find_element(:id, "edit-field-image-cache-und-0-upload").send_keys "/Users/ragavendra.nagraj/Desktop/product.png"
-=end
+		
+		@driver.find_element(:id, "edit-field-image-cache-und-0-upload").send_keys row[7]
 		#@driver.find_element(:id, "edit-taxonomy-tags-7").click
 		@driver.find_element(:id, "edit-taxonomyextra-und").clear
 		@driver.find_element(:id, "edit-taxonomyextra-und").send_keys row[3]
