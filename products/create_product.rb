@@ -19,7 +19,8 @@ describe "CreateProduct" do
 
 	after(:each) do
 		#@driver.quit
-		@verification_errors.should == []
+		#@verification_errors.should == []
+		expect @verification_errors == []
 	end
 =begin
 	it "login" do
@@ -60,21 +61,45 @@ describe "CreateProduct" do
 		@driver.find_element(:id, "edit-taxonomyextra-und").clear
 		@driver.find_element(:id, "edit-taxonomyextra-und").send_keys "Crystal, Swarovski"
 
-		#require 'pry'
-		#binding.pry
-
 		@driver.find_element(:id, "edit-model").clear
 		@driver.find_element(:id, "edit-model").send_keys "FJ_SWAROLEAF"
 		@driver.find_element(:id, "edit-sell-price").clear
 		@driver.find_element(:id, "edit-sell-price").send_keys "200"
 		@driver.find_element(:id, "edit-weight--2").clear
 		@driver.find_element(:id, "edit-weight--2").send_keys "100"
-		#@driver.find_element(:id, "edit-list-price").location_once_scrolled_into_view
-		#@driver.find_element(:id, "edit-model").location_once_scrolled_into_view
-		#@driver.find_element(:id, "edit-submit").clear
+		@driver.find_element(:css, "#block-views-uc-products-block-1 > h2").location_once_scrolled_into_view	
+		@driver.find_element(:id, "edit-pkg-qty").location_once_scrolled_into_view
+		
+		sleep 1
+
 		@driver.find_element(:id, "edit-submit").click
+		sleep 1
+		
+		#WaitForObject(@driver, :css, 'em.placeholder')
+		WaitForObject(@driver, :css, 'div.messages.status')
+
 		# Warning: verifyTextPresent may require manual changes
-		verify { @driver.find_element(:css, "BODY").text.should =~ /^[\s\S]*Product Swarovski Crystal Leaf has been created\.[\s\S]*$/ }
+		verify { expect (@driver.find_element(:css, "div.messages.status").text) == "Status message\nProduct Swarovski Crystal Leaf title has been created." }
+	end
+
+	def WaitForObject(parent, how, what)	
+		#if timeout==nil
+			timeout = 30
+		#end
+		now = Time.now
+		later = Time.now
+		displayed = false
+		while ( !displayed && (later-now<timeout) )
+			begin
+				displayed = parent.find_element(how, what).displayed?
+			rescue
+			end
+			sleep 1
+			later = Time.now
+		end
+		if !displayed
+			raise "Object not found"
+		end
 	end
 
 	def element_present?(how, what)
