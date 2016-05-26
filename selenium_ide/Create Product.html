@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://www.fashionjewelry.co.in/" />
+<title>Create Product</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Create Product</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/node/add/product</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Product</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=edit-title</td>
+	<td>Swarovski Crystal Leaf title</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=edit-body-und-0-value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=edit-body-und-0-value</td>
+	<td>Swarovski Crystal Leaf description should go here</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id=edit-taxonomy-catalog-und</td>
+	<td>label=Jewelry Set</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=edit-field-image-cache-und-0-upload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=edit-field-image-cache-und-0-upload</td>
+	<td>/Users/ragavendra.nagraj/Desktop/product.png</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=edit-taxonomy-tags-7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=edit-taxonomyextra-und</td>
+	<td>Crystal, Swarovski</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=edit-model</td>
+	<td>FJ_SWAROLEAF</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=edit-sell-price</td>
+	<td>200</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=edit-weight--2</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=edit-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Show Open Graph meta tags (e.g. for Facebook sharing)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Hide Open Graph meta tags (e.g. for Facebook sharing)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=edit-list-price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=edit-list-price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=edit-list-price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=edit-list-price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span[name=&quot;Donate A Car Canada&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=edit-pkg-qty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#block-views-uc-products-block-1 &gt; h2</td>
+	<td>Similar Products</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#block-views-uc-products-block-1 &gt; h2</td>
+	<td>Similar Products</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=edit-pkg-qty</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=edit-list-price</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=edit-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.messages.status</td>
+	<td>Status message Product Swarovski Crystal Leaf has been deleted.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.messages.status</td>
+	<td>Status message Product Swarovski Crystal Leaf has been deleted.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=em.placeholder</td>
+	<td>Swarovski Crystal Leaf</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=em.placeholder</td>
+	<td>Swarovski Crystal Leaf</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.messages.error &gt; ul &gt; li</td>
+	<td>Name field is required.</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Product Swarovski Crystal Leaf has been created.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Open File Browser</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td></td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=a[name=&quot;sendto&quot;] &gt; span</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
