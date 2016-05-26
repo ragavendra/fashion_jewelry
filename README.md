@@ -7,4 +7,8 @@ Repo to hold source and test code for the fashion jewelry eshop
 
 ###run create product like below
 
-```ruby products/create_product.rb```
+```USER=username PASSWD='password' rspec products/create_product.rb```
+
+or
+
+```USER=username PASSWD='password' ruby products/create_product.rb```
