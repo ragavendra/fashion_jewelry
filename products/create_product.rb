@@ -12,6 +12,7 @@ describe "CreateProduct" do
 	before(:each) do
 		@driver = Selenium::WebDriver.for :firefox
 		@base_url = "http://www.fashionjewelry.co.in/"
+		#@base_url = "http://192.168.44.45/jewelry"
 		@accept_next_alert = true
 		@driver.manage.timeouts.implicit_wait = 30
 		@verification_errors = []
@@ -46,7 +47,35 @@ describe "CreateProduct" do
 			  option.text == row[2]
 		end.click
 		
-		@driver.find_element(:id, "edit-field-image-cache-und-0-upload").send_keys row[7]
+		file_path = File.join(File.dirname(__FILE__), row[7]) 
+		@driver.find_element(:id, "edit-field-image-cache-und-0-upload").location_once_scrolled_into_view
+		@driver.find_element(:id, "edit-field-image-cache-und-0-upload").send_keys file_path
+		sleep 1
+		WaitForObject(@driver, :id, 'edit-field-image-cache-und-0-upload-button')# if row[7]
+		
+		begin
+			#@driver.find_element(:id, "edit-field-image-cache-und-0-upload-button").location_once_scrolled_into_view
+			@driver.find_element(:id, "edit-field-image-cache-und-0-upload-button").click
+		rescue => e
+			require 'pry'
+			binding.pry
+		end
+		sleep 1
+	
+		file_path = File.join(File.dirname(__FILE__), row[8]) 
+		@driver.find_element(:id, "edit-field-image-cache-und-1-upload").send_keys file_path if row[8]
+		sleep 1
+		WaitForObject(@driver, :id, 'edit-field-image-cache-und-1-upload-button--2') if row[8]
+		@driver.find_element(:id, "edit-field-image-cache-und-1-upload-button--2").click if row[8]
+		sleep 1
+		
+		file_path = File.join(File.dirname(__FILE__), row[9]) 
+		@driver.find_element(:id, "edit-field-image-cache-und-2-upload").send_keys file_path if row[9]
+		sleep 1
+		WaitForObject(@driver, :id, 'edit-field-image-cache-und-2-upload-button--3') if row[9]
+		@driver.find_element(:id, "edit-field-image-cache-und-2-upload-button--3").click if row[9]
+		sleep 1
+		
 		#@driver.find_element(:id, "edit-taxonomy-tags-7").click
 		@driver.find_element(:id, "edit-taxonomyextra-und").clear
 		@driver.find_element(:id, "edit-taxonomyextra-und").send_keys row[3]
