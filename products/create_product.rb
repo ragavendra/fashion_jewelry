@@ -32,7 +32,7 @@ describe "CreateProduct" do
 		@driver.find_element(:id, "edit-pass").send_keys ENV['PASSWD']
 		@driver.find_element(:id, "edit-submit").click
 		
-		CSV.foreach(File.join(File.dirname(__FILE__), 'products.csv')) do |row|
+		CSV.foreach(File.join(File.dirname(__FILE__), 'products_1.csv')) do |row|
 		@driver.get(@base_url + "/node/add/product")
 		@driver.find_element(:id, "edit-title").clear
 		@driver.find_element(:id, "edit-title").send_keys row[0]
@@ -42,39 +42,31 @@ describe "CreateProduct" do
 		
 		#value = "Jewelry Set"
 		my_select = @driver.find_element(:id, "edit-taxonomy-catalog-und")
-		my_select.click
 		my_select.find_elements( :tag_name => "option" ).find do |option|
 			  option.text == row[2]
 		end.click
-		
-		file_path = File.join(File.dirname(__FILE__), row[7]) 
-		@driver.find_element(:id, "edit-field-image-cache-und-0-upload").location_once_scrolled_into_view
-		@driver.find_element(:id, "edit-field-image-cache-und-0-upload").send_keys file_path
-		sleep 1
-		WaitForObject(@driver, :id, 'edit-field-image-cache-und-0-upload-button')# if row[7]
-		
-		begin
-			#@driver.find_element(:id, "edit-field-image-cache-und-0-upload-button").location_once_scrolled_into_view
-			@driver.find_element(:id, "edit-field-image-cache-und-0-upload-button").click
-		rescue => e
-			require 'pry'
-			binding.pry
-		end
-		sleep 1
 	
-		file_path = File.join(File.dirname(__FILE__), row[8]) 
-		@driver.find_element(:id, "edit-field-image-cache-und-1-upload").send_keys file_path if row[8]
-		sleep 1
-		WaitForObject(@driver, :id, 'edit-field-image-cache-und-1-upload-button--2') if row[8]
-		@driver.find_element(:id, "edit-field-image-cache-und-1-upload-button--2").click if row[8]
-		sleep 1
-		
-		file_path = File.join(File.dirname(__FILE__), row[9]) 
-		@driver.find_element(:id, "edit-field-image-cache-und-2-upload").send_keys file_path if row[9]
-		sleep 1
-		WaitForObject(@driver, :id, 'edit-field-image-cache-und-2-upload-button--3') if row[9]
-		@driver.find_element(:id, "edit-field-image-cache-und-2-upload-button--3").click if row[9]
-		sleep 1
+		index = 0
+		3.times do
+			if row[index]
+				@driver.find_element(:id, "edit-body-und-0-value").location_once_scrolled_into_view
+				
+				file_path = File.join(File.dirname(__FILE__), row[index + 7]) 
+				#require 'pry'
+				#binding.pry
+				sleep 1
+				@driver.find_element(:id, "edit-field-image-cache-und-#{index}-upload").send_keys file_path
+				
+				sleep 1
+				WaitForObject(@driver, :name, "field_image_cache_und_#{index}_upload_button")
+				#@driver.find_element(:name, "field_image_cache_und_#{index}_upload_button").location_once_scrolled_into_view
+				@driver.find_element(:name, "field_image_cache_und_#{index}_upload_button").click
+				
+				sleep 1
+				index = index + 1
+			end
+
+		end
 		
 		#@driver.find_element(:id, "edit-taxonomy-tags-7").click
 		@driver.find_element(:id, "edit-taxonomyextra-und").clear
@@ -92,8 +84,11 @@ describe "CreateProduct" do
 		sleep 1
 
 		@driver.find_element(:id, "edit-submit").click
-		sleep 1
-		
+		sleep 5
+	
+		#require 'pry'
+		#binding.pry
+
 		#WaitForObject(@driver, :css, 'em.placeholder')
 		WaitForObject(@driver, :css, 'div.messages.status')
 
