@@ -50,7 +50,8 @@ describe "CreateProduct" do
 		3.times do
 			if row[index]
 				@driver.find_element(:id, "edit-body-und-0-value").location_once_scrolled_into_view
-				
+			
+				break unless row[index + 7]
 				file_path = File.join(File.dirname(__FILE__), row[index + 7]) 
 				#require 'pry'
 				#binding.pry
@@ -81,10 +82,10 @@ describe "CreateProduct" do
 		@driver.find_element(:css, "#block-views-uc-products-block-1 > h2").location_once_scrolled_into_view	
 		@driver.find_element(:id, "edit-pkg-qty").location_once_scrolled_into_view
 		
-		sleep 1
+		sleep 3
 
 		@driver.find_element(:id, "edit-submit").click
-		sleep 5
+		sleep 10
 	
 		#require 'pry'
 		#binding.pry
@@ -98,23 +99,12 @@ describe "CreateProduct" do
 	end
 	
 	def WaitForObject(parent, how, what)	
-		#if timeout==nil
-			timeout = 30
-		#end
-		now = Time.now
-		later = Time.now
-		displayed = false
-		while ( !displayed && (later-now<timeout) )
-			begin
-				displayed = parent.find_element(how, what).displayed?
-			rescue
-			end
+		timeout = 90
+		timeout.times do
+			return if parent.find_element(how, what).displayed?
 			sleep 1
-			later = Time.now
 		end
-		if !displayed
-			raise "Object not found"
-		end
+		#raise "Object not found" unless displayed
 	end
 
 	def element_present?(how, what)
