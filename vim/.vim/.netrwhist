@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/ragavendra.nagraj/Documents/gitbase/test-auto/LoanApp'
+let g:netrw_dirhist_2='/Users/ragavendra.nagraj/Documents/gitbase/test-auto/LoanApp/specs'
+let g:netrw_dirhist_3='/Users/ragavendra.nagraj/Documents/gitbase/test-auto/LoanApp'
+let g:netrw_dirhist_4='/Users/ragavendra.nagraj/Documents/gitbase/test-auto/LoanApp/specs'
+let g:netrw_dirhist_5='/Users/ragavendra.nagraj/Documents/gitbase/test-auto/LoanApp'
+let g:netrw_dirhist_6='/Users/ragavendra.nagraj/.vim/bundle/Vundle.vim'
